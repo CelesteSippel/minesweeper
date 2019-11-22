@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Cell = props => {
+const Mines = props => {
   return (
-    <div>
+    <>
       <td
         onClick={props.handleLeftClick}
         onContextMenu={e => {
@@ -12,8 +12,8 @@ const Cell = props => {
       >
         {props.display}
       </td>
-    </div>
+    </>
   )
 }
 
-export default Cell
+export default Mines

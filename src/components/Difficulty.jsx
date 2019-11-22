@@ -5,13 +5,13 @@ const Difficulty = props => {
     <>
       <section className="which-difficulty">
         <h2>Choose Difficulty</h2>
-        <button className="button-easy" onClick={props.mediumLevel}>
+        <button className="button" onClick={props.mediumLevel}>
           Easy (10 Mines){' '}
         </button>
-        <button className="button medium" onClick={props.mediumLevel}>
+        <button className="button" onClick={props.mediumLevel}>
           Intermediate (40 Mines)
         </button>
-        <button className="button hard" onClick={props.hardLevel}>
+        <button className="button" onClick={props.hardLevel}>
           Expert (99 Mines)
         </button>
         {props.showBoard}

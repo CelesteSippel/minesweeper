@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Cell from './Cell'
+import Mines from './Mines'
 import Difficulty from './Difficulty'
 import GameOver from './GameOver'
 import ResetGame from './ResetGame'
@@ -9,8 +9,9 @@ const BoardGame = () => {
   const [id, setId] = useState('')
   const [board, setBoard] = useState([])
   const [difficulty, setDifficulty] = useState('')
-  const [state, setState] = useState('')
-  const [status, setStatus] = useState('')
+  const [state, setState] = useState('new')
+  const [mines, setMines] = useState(10)
+  // const [status, setStatus] = useState('')
 
   const createGame = async () => {
     const resp = await axios.post(
@@ -21,6 +22,7 @@ const BoardGame = () => {
     setId(resp.data.id)
     setBoard(resp.data.board)
     setDifficulty(resp.data.difficulty)
+    setMines(resp.data.mines)
   }
   useEffect(() => {
     createGame()
@@ -32,7 +34,7 @@ const BoardGame = () => {
   }
   const leftClick = async (x, y) => {
     const resp = await axios.post(
-      'https://minesweeper-api.herokuapp.com/games/games/{id}/check',
+      `https://minesweeper-api.herokuapp.com/games/games/${state.id}/check`,
       {
         row: x,
         col: y
@@ -50,11 +52,11 @@ const BoardGame = () => {
     leftClick()
   }, [])
 
-  //I think I need to put gameOver???
+  // I think I need to put gameOver???
 
   const rightClick = async (x, y) => {
     const resp = await axios.post(
-      `https://minesweeper-api.herokuapp.com/games/games/${this.state.id}/flag`,
+      `https://minesweeper-api.herokuapp.com/games/games/${state.id}/flag`,
       {
         row: x,
         col: y
@@ -72,21 +74,15 @@ const BoardGame = () => {
 
   const gameOver = async () => {
     if (state === 'lost') {
-      setState({
-        status: 'You lose!! Try again!'
-      })
+      setState('You lose!! Try again!')
     } else if ((state = 'won')) {
-      setState({
-        status: 'Winner!!'
-      })
+      setState('Winner!!')
     }
   }
   //  or do I put setStatus("")
   const resetGame = () => {
     createGame()
-    setState({
-      status: ''
-    })
+    setState('')
   }
   return (
     <>
@@ -98,26 +94,22 @@ const BoardGame = () => {
       />
       <main>
         <section className="play" />
-        <GameOver displayResult={status} />
+        <GameOver displayResult={state} />
         <ResetGame resetClick={resetGame} />
         <table className="game-board">
           <tbody>
-            {board.map((col, i) => {
-              return (
-                <tr key={i}>
-                  {col.map((row, j) => {
-                    return (
-                      <Cell
-                        key={j}
-                        display={board[i][j]}
-                        handleLeftClick={() => leftClick(i, j)}
-                        handleRightClick={() => rightClick(i, j)}
-                      />
-                    )
-                  })}
-                </tr>
-              )
-            })}
+            <table>
+              {board.map(arr => {
+                return (
+                  <tr>
+                    {arr.map(ar => {
+                      return <td></td>
+                    })}
+                  </tr>
+                )
+              })}
+            </table>
+            ) }
           </tbody>
         </table>
       </main>
