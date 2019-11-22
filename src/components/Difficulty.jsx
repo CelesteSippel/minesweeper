@@ -5,7 +5,7 @@ const Difficulty = props => {
     <>
       <section className="which-difficulty">
         <h2>Choose Difficulty</h2>
-        <button className="button" onClick={props.mediumLevel}>
+        <button className="button" onClick={props.easyLevel}>
           Easy (10 Mines){' '}
         </button>
         <button className="button" onClick={props.mediumLevel}>
