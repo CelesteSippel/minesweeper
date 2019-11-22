@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
-import Mines from './Mines'
+import Cells from './Cells'
 import GameOver from './GameOver'
 import ResetGame from './ResetGame'
 import Difficulty from './Difficulty'
@@ -10,7 +10,9 @@ const BoardGame = () => {
   const [board, setBoard] = useState([])
   const [difficulty, setDifficulty] = useState('')
   const [state, setState] = useState('')
-  const [status, setStatus] = useState('')
+  const [mines, setMines] = useState([])
+
+  // const [status, setStatus] = useState('')
 
   const createGame = async number => {
     const resp = await Axios.post(
@@ -23,6 +25,8 @@ const BoardGame = () => {
     setId(resp.data.id)
     setBoard(resp.data.board)
     setDifficulty(resp.data.difficulty)
+    setState(resp.data.state)
+    setMines(resp.data.mines)
   }
   useEffect(() => {
     createGame()
@@ -44,7 +48,7 @@ const BoardGame = () => {
     setBoard(resp.data.board)
     setId(resp.data.id)
     setState(resp.data.state)
-    gameOver()
+    setMines(resp.data.mines)
   }
 
   const rightClick = async (x, y) => {
@@ -58,10 +62,12 @@ const BoardGame = () => {
     setBoard(resp.data.board)
     setId(resp.data.id)
     setState(resp.data.state)
+    setMines(resp.data.mines)
+
     console.log(resp)
   }
 
-  const gameOver = async () => {
+  const gameOver = () => {
     if (state === 'lost') {
       setState({
         status: 'Oh no, you lose!! Try again!'
@@ -73,6 +79,7 @@ const BoardGame = () => {
     }
   }
 
+  console.log('this is the' + gameOver())
   const resetGame = () => {
     createGame()
     setState({
@@ -99,7 +106,7 @@ const BoardGame = () => {
                 <tr key={i}>
                   {col.map((row, j) => {
                     return (
-                      <Mines
+                      <Cells
                         key={j}
                         display={board[i][j]}
                         handleLeftClick={() => leftClick(i, j)}

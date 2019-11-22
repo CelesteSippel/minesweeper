@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Mines = props => {
+const Cells = props => {
   return (
     <>
       <td
@@ -16,4 +16,4 @@ const Mines = props => {
   )
 }
 
-export default Mines
+export default Cells
