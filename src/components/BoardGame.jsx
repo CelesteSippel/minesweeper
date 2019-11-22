@@ -82,7 +82,7 @@ const BoardGame = () => {
 
   return (
     <>
-      <h1>Minesweeper</h1>
+      <h1 className="box-title">Minesweeper</h1>
       <Difficulty
         easyLevel={() => createGame(0)}
         mediumLevel={() => createGame(1)}
@@ -90,7 +90,7 @@ const BoardGame = () => {
       />
       <main>
         <section className="play" />
-        <GameOver displayResult={status} />
+        <GameOver displayResult={setStatus} />
         <ResetGame resetClick={resetGame} />
         <table className="game-board">
           <tbody>

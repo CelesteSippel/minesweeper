@@ -3,16 +3,16 @@ import React from 'react'
 const Difficulty = props => {
   return (
     <>
-      <section className="which-difficulty">
+      <section className="what-difficulty">
         <h2>Choose Difficulty</h2>
         <button className="button" onClick={props.easyLevel}>
-          Easy (10 Mines){' '}
+          Easy{' '}
         </button>
         <button className="button" onClick={props.mediumLevel}>
-          Intermediate (40 Mines)
+          Intermediate
         </button>
         <button className="button" onClick={props.hardLevel}>
-          Expert (99 Mines)
+          Expert
         </button>
         {props.showBoard}
       </section>
