@@ -90,7 +90,7 @@ const BoardGame = () => {
       />
       <main>
         <section className="play" />
-        <GameOver displayResult={setStatus} />
+        <GameOver displayResult={state.status} />
         <ResetGame resetClick={resetGame} />
         <table className="game-board">
           <tbody>
