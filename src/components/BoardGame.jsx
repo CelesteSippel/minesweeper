@@ -32,7 +32,7 @@ const BoardGame = () => {
     createGame()
   }, [])
 
-  const showBoard = () => {
+  let showBoard = () => {
     if (board) {
     }
   }
